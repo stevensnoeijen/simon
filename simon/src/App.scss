@@ -1,3 +1,5 @@
+$button-size: 100px;
+
 .App {
   text-align: center;
   background-color: #282c34;
@@ -16,7 +18,8 @@
   }
 }
 
-.App-header, .App-body {
+.App-header,
+.App-body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,10 +40,10 @@
   }
 }
 
-.button { 
+.button {
   width: 100px;
   height: 100px;
-  opacity: 0.5; 
+  opacity: 0.5;
   display: inline-block;
   cursor: pointer;
   padding: 15px 25px;
@@ -48,22 +51,19 @@
   text-align: center;
   outline: none;
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-} 
+}
 
-.on { 
-  opacity: 1 !important; 
+.on {
+  opacity: 1 !important;
 }
 
 .button:hover {
-  opacity: 0.6; 
+  opacity: 0.6;
 }
 
 .button:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  opacity: 0.75; 
+  transform: scale(.95, .95) ;
+  opacity: 0.75;
 }
 
 button {
@@ -73,18 +73,18 @@ button {
   cursor: pointer;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
 
 button:disabled {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 button:hover {
-  background-color: #3e8e41
+  background-color: #3e8e41;
 }
 
 button:active {
@@ -92,3 +92,17 @@ button:active {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+.quarter-circle-bottom-right {
+  border-radius: 0 0 $button-size 0;
+}
+.quarter-circle-buttom-left {
+  border-radius: 0 0 0 $button-size;
+}
+.quarter-circle-top-right {
+  border-radius: 0 $button-size 0 0;
+}
+.quarter-circle-top-left {
+  border-radius: $button-size 0 0 0;
+}
+

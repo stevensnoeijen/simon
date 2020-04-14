@@ -30,11 +30,11 @@ export class App extends React.Component {
         </header>
         <div className="App-body">
           <div>
-            <div className={'button ' + (this.state.green ? "on" : "off")} style={{backgroundColor: 'green'}} onClick={() => this.onButtonClick('green')}></div>
-            <div className={'button ' + (this.state.red ? "on" : "off")} style={{backgroundColor: 'red'}} onClick={() => this.onButtonClick('red')}></div>
+            <div className={'quarter-circle-top-left button ' + (this.state.green ? "on" : "off")} style={{backgroundColor: 'green'}} onClick={() => this.onButtonClick('green')}></div>
+            <div className={'quarter-circle-top-right button ' + (this.state.red ? "on" : "off")} style={{backgroundColor: 'red'}} onClick={() => this.onButtonClick('red')}></div>
             <br/>
-            <div className={'button ' + (this.state.yellow ? "on" : "off")} style={{backgroundColor: 'yellow'}} onClick={() => this.onButtonClick('yellow')}></div>
-            <div className={'button ' + (this.state.blue ? "on" : "off")} style={{backgroundColor: 'blue'}} onClick={() => this.onButtonClick('blue')}></div>
+            <div className={'quarter-circle-buttom-left button ' + (this.state.yellow ? "on" : "off")} style={{backgroundColor: 'yellow'}} onClick={() => this.onButtonClick('yellow')}></div>
+            <div className={'quarter-circle-bottom-right button ' + (this.state.blue ? "on" : "off")} style={{backgroundColor: 'blue'}} onClick={() => this.onButtonClick('blue')}></div>
           </div>
 
           <br/>
