@@ -42,8 +42,53 @@
   height: 100px;
   opacity: 0.5; 
   display: inline-block;
+  cursor: pointer;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
 } 
 
 .on { 
-  opacity: 1; 
+  opacity: 1 !important; 
+}
+
+.button:hover {
+  opacity: 0.6; 
+}
+
+.button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  opacity: 0.75; 
+}
+
+button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:disabled {
+  opacity: .5;
+}
+
+button:hover {
+  background-color: #3e8e41
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
