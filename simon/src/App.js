@@ -25,20 +25,23 @@ export class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>Simon says</h1>
-        </header>
         <div className="App-body">
-          <div>
-            <div className={'quarter-circle-top-left button ' + (this.state.green ? "on" : "off")} style={{backgroundColor: 'green'}} onClick={() => this.onButtonClick('green')}></div>
-            <div className={'quarter-circle-top-right button ' + (this.state.red ? "on" : "off")} style={{backgroundColor: 'red'}} onClick={() => this.onButtonClick('red')}></div>
-            <br/>
-            <div className={'quarter-circle-buttom-left button ' + (this.state.yellow ? "on" : "off")} style={{backgroundColor: 'yellow'}} onClick={() => this.onButtonClick('yellow')}></div>
-            <div className={'quarter-circle-bottom-right button ' + (this.state.blue ? "on" : "off")} style={{backgroundColor: 'blue'}} onClick={() => this.onButtonClick('blue')}></div>
+          <div className={'circle'}>
+            <div>
+              <div className={'quarter-circle-top-left button ' + (this.state.green ? "on" : "off")} style={{backgroundColor: 'green'}} onClick={() => this.onButtonClick('green')}></div>
+              <div className={'quarter-circle-top-right button ' + (this.state.red ? "on" : "off")} style={{backgroundColor: 'red'}} onClick={() => this.onButtonClick('red')}></div>
+            </div>
+            <div>
+              <div className={'quarter-circle-buttom-left button ' + (this.state.yellow ? "on" : "off")} style={{backgroundColor: 'yellow'}} onClick={() => this.onButtonClick('yellow')}></div>
+              <div className={'quarter-circle-bottom-right button ' + (this.state.blue ? "on" : "off")} style={{backgroundColor: 'blue'}} onClick={() => this.onButtonClick('blue')}></div>
+            </div>
+            <div className={'center'}>
+              <strong>SIMON</strong>
+              <div>
+                <button disabled={!this.state.startButtonEnabled} onClick={this.startGame} className={'start-button'} title={'start game'}></button>
+              </div>
+            </div>
           </div>
-
-          <br/>
-          <button disabled={!this.state.startButtonEnabled} onClick={this.startGame} >Start</button>
         </div>
       </div>
     );
