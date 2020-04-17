@@ -1,13 +1,28 @@
 import React from 'react';
 import './App.scss';
 
-export class App extends React.Component {
+type AppProps = {
 
-  pattern = [];
-  userStep = -1;
-  userTurn = false;
+}
 
-  constructor(props){
+
+type AppState = {
+  level?: number;
+  startButtonEnabled?: boolean;
+
+  green?: boolean;
+  red?: boolean;
+  yellow?: boolean;
+  blue?: boolean;
+}
+
+export class App extends React.Component<AppProps, AppState> {
+
+  private pattern : string[] = [];
+  private userStep = -1;
+  private userTurn = false;
+
+  constructor(props: AppProps){
     super(props);
 
     this.state = {
@@ -85,7 +100,7 @@ export class App extends React.Component {
         break;
     }
 
-    this.pattern.push(color);
+    this.pattern.push(color as string);
     
     //play pattern
     for(const color of this.pattern){
@@ -102,7 +117,7 @@ export class App extends React.Component {
     this.userTurn = true;
   };
 
-  onButtonClick(color){
+  onButtonClick(color: string){
     if(this.userTurn === false){
       return;
     }
@@ -136,6 +151,6 @@ export class App extends React.Component {
   }
 };
 
-async function sleep(ms) {
+async function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
