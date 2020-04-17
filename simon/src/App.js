@@ -11,6 +11,7 @@ export class App extends React.Component {
     super(props);
 
     this.state = {
+      level: 0,
       startButtonEnabled: true,
       green: false,
       red: false,
@@ -35,11 +36,14 @@ export class App extends React.Component {
               <div className={'quarter-circle-buttom-left button ' + (this.state.yellow ? "on" : "off")} onClick={() => this.onButtonClick('yellow')}></div>
               <div className={'quarter-circle-bottom-right button ' + (this.state.blue ? "on" : "off")} onClick={() => this.onButtonClick('blue')}></div>
             </div>
-            <div className={'center'}>
+            <div className={'inner-center'}>
               <strong>SIMON</strong>
               <div>
                 <button disabled={!this.state.startButtonEnabled} onClick={this.startGame} className={'start-button'} title={'start game'}></button>
               </div>
+              <sub>
+                lvl {this.state.level} 
+              </sub>
             </div>
           </div>
         </div>
@@ -57,7 +61,11 @@ export class App extends React.Component {
   }
 
   async runNewRound(){
-    console.log('level ' + (this.pattern.length + 1));
+    const level = this.pattern.length + 1;
+    console.log('level ' + level);
+    this.setState({
+      level: level
+    });
     this.userStep = -1;
     // generate color
     const newNumber = Math.floor(Math.random() * 4);
@@ -106,9 +114,7 @@ export class App extends React.Component {
     console.log(`click was ${isValid}`);
     if(!isValid) {
       alert('incorrect! game over');
-      this.setState({
-        startButtonEnabled: true
-      });
+      this.reset();
       return;
     }
     // if its the last one
@@ -120,6 +126,13 @@ export class App extends React.Component {
     }
 
     this.userTurn = true;
+  }
+
+  reset(){
+    this.setState({
+      level: 0,
+      startButtonEnabled: true
+    });
   }
 };
 
