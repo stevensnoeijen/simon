@@ -1,0 +1,58 @@
+@import '../../variables.scss';
+
+.circle { 
+    div {
+  
+      .quarter-circle-top-left {
+        border-radius: $button-size 0 0 0;
+        border-right: solid black $button-border;
+        border-bottom: solid black $button-border;
+        background-color: #00ff00;
+        &.on {
+          box-shadow: 0 0 $button-glow-radius #00ff00;
+        }
+      }
+      .quarter-circle-top-right {
+        border-radius: 0 $button-size 0 0;
+        border-bottom: solid black $button-border;
+        background-color: #ff0000;
+        &.on {
+          box-shadow: 0 0 $button-glow-radius #ff0000;
+        }
+      }
+      .quarter-circle-buttom-left {
+        border-radius: 0 0 0 $button-size;
+        border-right: solid black $button-border;
+        background-color: #fefe00;
+        &.on {
+          box-shadow: 0 0 $button-glow-radius #fefe00;
+        }
+      }
+      .quarter-circle-bottom-right {
+        border-radius: 0 0 $button-size 0;
+        background-color: #0000ff;
+        &.on {
+          box-shadow: 0 0 $button-glow-radius #0000ff;
+        }
+      }
+  
+      .button {
+        width: $button-size;
+        height: $button-size;
+        opacity: 0.9;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 24px;
+        text-align: center;
+        outline: none;
+  
+        &:active {
+          transform: scale(.97, .97);
+          transition: 0.2s;
+        }
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+}

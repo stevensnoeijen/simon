@@ -1,12 +1,12 @@
 import React from 'react';
-import './App.scss';
+import './Board.scss';
+import { Button } from '../button/Button';
 
-type AppProps = {
+export type BoardProps = {
 
 }
 
-
-type AppState = {
+export type BoardState = {
   level?: number;
   startButtonEnabled?: boolean;
 
@@ -16,7 +16,7 @@ type AppState = {
   blue?: boolean;
 }
 
-export class App extends React.Component<AppProps, AppState> {
+export class Board extends React.Component<BoardProps, BoardState> {
 
   /**
    * Light pattern of simon
@@ -33,7 +33,7 @@ export class App extends React.Component<AppProps, AppState> {
    */
   private userTurn = false;
 
-  constructor(props: AppProps){
+  constructor(props: BoardProps){
     super(props);
 
     this.state = {
@@ -51,29 +51,25 @@ export class App extends React.Component<AppProps, AppState> {
 
   render(){
     return (
-      <div className="App">
-        <div className="App-body">
-          <div className={'circle'}>
-            <div>
-              <div className={'quarter-circle-top-left button ' + (this.state.green ? "on" : "off")} onClick={() => this.buttonClick('green')}></div>
-              <div className={'quarter-circle-top-right button ' + (this.state.red ? "on" : "off")} onClick={() => this.buttonClick('red')}></div>
-            </div>
-            <div>
-              <div className={'quarter-circle-buttom-left button ' + (this.state.yellow ? "on" : "off")} onClick={() => this.buttonClick('yellow')}></div>
-              <div className={'quarter-circle-bottom-right button ' + (this.state.blue ? "on" : "off")} onClick={() => this.buttonClick('blue')}></div>
-            </div>
-            <div className={'inner-center'}>
-              <strong>SIMON</strong>
-              <div>
-                <button disabled={!this.state.startButtonEnabled} onClick={this.startGame} className={'start-button'} title={'start game'}></button>
-              </div>
-              <sub>
-                lvl {this.state.level} 
-              </sub>
-            </div>
-          </div>
+        <div className={'circle'}>
+        <div>
+            <Button className={'quarter-circle-top-left'} color={'green'} on={this.state.green as boolean} onClick={this.buttonClick} />
+            <Button className={'quarter-circle-top-right'} color={'red'} on={this.state.red as boolean} onClick={this.buttonClick} />
         </div>
-      </div>
+        <div>
+            <Button className={'quarter-circle-buttom-left'} color={'yellow'} on={this.state.yellow as boolean} onClick={this.buttonClick} />
+            <Button className={'quarter-circle-bottom-right'} color={'blue'} on={this.state.blue as boolean} onClick={this.buttonClick} />
+        </div>
+        <div className={'inner-center'}>
+            <strong>SIMON</strong>
+            <div>
+            <button disabled={!this.state.startButtonEnabled} onClick={this.startGame} className={'start-button'} title={'start game'}></button>
+            </div>
+            <sub>
+            lvl {this.state.level} 
+            </sub>
+        </div>
+        </div>
     );
   };
 
@@ -146,7 +142,7 @@ export class App extends React.Component<AppProps, AppState> {
     }
   }
 
-  buttonClick(color: string){
+  async buttonClick(color: string){
     if(this.userTurn === false){
       // cancel click if its not the user's turn
       return;
@@ -164,9 +160,8 @@ export class App extends React.Component<AppProps, AppState> {
     // if last step was clicked
     if(this.pattern.length === (this.userStep + 1)){
       this.userTurn = false;
-      sleep(1000).then(() => {
-        this.runNewRound();
-      });
+      await sleep(1000);
+      this.runNewRound();
       return;
     }
 

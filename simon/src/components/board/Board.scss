@@ -1,0 +1,47 @@
+@import '../../variables.scss';
+
+.start-button {
+    padding: 15px;
+    cursor: pointer;
+    outline: none;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 3px #999;
+  
+    &:hover {
+      background-color: #3e8e41;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+    &:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+}
+  
+.circle {
+    position: relative;
+    background-color: #000000;
+    border-radius: 50%;
+    padding: $button-border;
+    line-height: 0;
+    box-shadow: 0 0 10px #000000;
+  
+    div {  
+      &.inner-center {
+        line-height: 1;
+        position: absolute;
+        left: calc(50% - 75px);
+        top: calc(50% - 75px);
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        display: inline-block;
+        background-color: black;
+        padding: 25px;
+      }
+    }
+  }
