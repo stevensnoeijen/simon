@@ -1,4 +1,6 @@
 $button-size: 200px;
+$button-border: 20px;
+$button-glow-radius: 50px;
 
 .App {
   padding-top: 50px;
@@ -18,7 +20,6 @@ $button-size: 200px;
 
 .start-button {
   padding: 15px;
-  text-align: center;
   cursor: pointer;
   outline: none;
   background-color: #4caf50;
@@ -42,49 +43,70 @@ $button-size: 200px;
 
 .circle {
   position: relative;
-  // background-color: #000000;
-  // border-radius: 50%;
-  // width: 500px;
-  // height: 500px;
+  background-color: #000000;
+  border-radius: 50%;
+  padding: $button-border;
   line-height: 0;
+  box-shadow: 0 0 10px #000000;
 
   div {
 
-    .quarter-circle-bottom-right {
-      border-radius: 0 0 $button-size 0;
-    }
-    .quarter-circle-buttom-left {
-      border-radius: 0 0 0 $button-size;
+    .quarter-circle-top-left {
+      border-radius: $button-size 0 0 0;
+      border-right: solid black $button-border;
+      border-bottom: solid black $button-border;
+      background-color: #00ff00;
+      &.on {
+        box-shadow: 0 0 $button-glow-radius #00ff00;
+      }
     }
     .quarter-circle-top-right {
       border-radius: 0 $button-size 0 0;
+      border-bottom: solid black $button-border;
+      background-color: #ff0000;
+      &.on {
+        box-shadow: 0 0 $button-glow-radius #ff0000;
+      }
     }
-    .quarter-circle-top-left {
-      border-radius: $button-size 0 0 0;
+    .quarter-circle-buttom-left {
+      border-radius: 0 0 0 $button-size;
+      border-right: solid black $button-border;
+      background-color: #fefe00;
+      &.on {
+        box-shadow: 0 0 $button-glow-radius #fefe00;
+      }
     }
- 
+    .quarter-circle-bottom-right {
+      border-radius: 0 0 $button-size 0;
+      background-color: #0000ff;
+      &.on {
+        box-shadow: 0 0 $button-glow-radius #0000ff;
+      }
+    }
+
     .button {
       width: $button-size;
       height: $button-size;
-      opacity: 0.5;
+      opacity: 0.9;
       display: inline-block;
       cursor: pointer;
       font-size: 24px;
       text-align: center;
       outline: none;
-      border: none;
+      transition: .2s;
 
       &:active {
-        transform: scale(.95, .95) ;
-        opacity: 0.75;
+        transform: scale(.97, .97);
+        transition: 0.2s;
       }
       &:hover {
-        opacity: 0.6;
+        opacity: 0.8;
       }
     }
 
     .on {
       opacity: 1 !important;
+       //transform: scale(1.1);
     }
 
     &.center {
