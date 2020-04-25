@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import './Button.scss';
 
 export type ButtonProps = {
@@ -9,24 +9,23 @@ export type ButtonProps = {
 };
 
 export type ButtonState = {
-    
+
 };
 
 export class Button extends React.Component<ButtonProps, ButtonState> {
+  public constructor(props: ButtonProps) {
+    super(props);
 
-    constructor(props : ButtonProps){
-        super(props);
+    this.click = this.click.bind(this);
+  }
 
-        this.click = this.click.bind(this);
-    } 
+  public render(): JSX.Element {
+    return (
+      <div className={this.props.className + ' button ' + (this.props.on ? 'on' : 'off')} onClick={this.click}></div>
+    );
+  }
 
-    render(){
-        return (
-            <div className={this.props.className + ' button ' + (this.props.on ? "on" : "off")} onClick={this.click}></div>
-        );
-    };
-
-    click() {
-        this.props.onClick(this.props.color);
-    }
+  private click(): void {
+    this.props.onClick(this.props.color);
+  }
 }

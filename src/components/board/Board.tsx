@@ -14,15 +14,14 @@ export type BoardState = {
     red?: boolean;
     yellow?: boolean;
     blue?: boolean;
-  }
+  };
 }
 
 export class Board extends React.Component<BoardProps, BoardState> {
-
   /**
    * Light pattern of simon
    */
-  private pattern : string[] = [];
+  private pattern: string[] = [];
   /**
    * Current click the user is at.
    * If -1 the user hasn't clicked yet.
@@ -34,7 +33,7 @@ export class Board extends React.Component<BoardProps, BoardState> {
    */
   private userTurn = false;
 
-  constructor(props: BoardProps){
+  public constructor(props: BoardProps) {
     super(props);
 
     this.state = {
@@ -45,61 +44,61 @@ export class Board extends React.Component<BoardProps, BoardState> {
         red: false,
         yellow: false,
         blue: false,
-      }
+      },
     };
 
     this.startGame = this.startGame.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
-  };
+  }
 
-  render(){
+  public render(): JSX.Element {
     return (
-        <div className={'circle'}>
+      <div className={'circle'}>
         <div>
-            <Button className={'quarter-circle-top-left'} color={'green'} on={this.state.buttons.green as boolean} onClick={this.buttonClick} />
-            <Button className={'quarter-circle-top-right'} color={'red'} on={this.state.buttons.red as boolean} onClick={this.buttonClick} />
+          <Button className={'quarter-circle-top-left'} color={'green'} on={this.state.buttons.green as boolean} onClick={this.buttonClick} />
+          <Button className={'quarter-circle-top-right'} color={'red'} on={this.state.buttons.red as boolean} onClick={this.buttonClick} />
         </div>
         <div>
-            <Button className={'quarter-circle-buttom-left'} color={'yellow'} on={this.state.buttons.yellow as boolean} onClick={this.buttonClick} />
-            <Button className={'quarter-circle-bottom-right'} color={'blue'} on={this.state.buttons.blue as boolean} onClick={this.buttonClick} />
+          <Button className={'quarter-circle-buttom-left'} color={'yellow'} on={this.state.buttons.yellow as boolean} onClick={this.buttonClick} />
+          <Button className={'quarter-circle-bottom-right'} color={'blue'} on={this.state.buttons.blue as boolean} onClick={this.buttonClick} />
         </div>
         <div className={'inner-center'}>
-            <strong>SIMON</strong>
-            <div>
+          <strong>SIMON</strong>
+          <div>
             <button disabled={!this.state.startButtonEnabled} onClick={this.startGame} className={'start-button'} title={'start game'}></button>
-            </div>
-            <sub>
-            lvl {this.state.level} 
-            </sub>
+          </div>
+          <sub>
+            lvl {this.state.level}
+          </sub>
         </div>
-        </div>
+      </div>
     );
-  };
+  }
 
-  async startGame(){
+  private async startGame(): Promise<void> {
     this.pattern = [];
     this.userStep = -1;
     this.setState({
-      startButtonEnabled: false
+      startButtonEnabled: false,
     });
     await this.runNewRound();
   }
 
-  increaseLevel(): void {
+  private increaseLevel(): void {
     const level = this.pattern.length + 1;
     this.setState({
-      level: level
+      level: level,
     });
     this.increasePattern();
   }
 
   /**
-   * @returns color
+   * @return color
    */
-  generateColor(): string {
+  private generateColor(): string {
     const newNumber = Math.floor(Math.random() * 4);
     let color;
-    switch(newNumber){
+    switch (newNumber) {
       case 0:
         color = 'green';
         break;
@@ -116,24 +115,24 @@ export class Board extends React.Component<BoardProps, BoardState> {
     return color as string;
   }
 
-  increasePattern(): void {
-    const color = this.generateColor()
+  private increasePattern(): void {
+    const color = this.generateColor();
     this.pattern.push(color);
   }
 
-  async runNewRound(){
+  private async runNewRound(): Promise<void> {
     this.increaseLevel();
     this.playPattern();
     this.startUserTurn();
-  };
+  }
 
-  startUserTurn(){
+  private startUserTurn(): void {
     this.userStep = -1;
     this.userTurn = true;
   }
 
-  async playPattern(){
-    for(const color of this.pattern){
+  private async playPattern(): Promise<void> {
+    for (const color of this.pattern) {
       this.setButton(color, true);
       await sleep(500);
       this.setButton(color, false);
@@ -141,16 +140,16 @@ export class Board extends React.Component<BoardProps, BoardState> {
     }
   }
 
-  private setButton(color: string, on: boolean){
+  private setButton(color: string, on: boolean): void {
     this.setState({
       buttons: {
-        [color]: on
-      }
+        [color]: on,
+      },
     });
   }
 
-  async buttonClick(color: string){
-    if(this.userTurn === false){
+  private async buttonClick(color: string): Promise<void> {
+    if (this.userTurn === false) {
       // cancel click if its not the user's turn
       return;
     }
@@ -159,13 +158,13 @@ export class Board extends React.Component<BoardProps, BoardState> {
 
     // check step
     const isValid = this.pattern[this.userStep] === color;
-    if(!isValid) {
+    if (!isValid) {
       alert('incorrect! game over');
       this.resetGame();
       return;
     }
     // if last step was clicked
-    if(this.pattern.length === (this.userStep + 1)){
+    if (this.pattern.length === (this.userStep + 1)) {
       this.userTurn = false;
       await sleep(1000);
       this.runNewRound();
@@ -175,15 +174,15 @@ export class Board extends React.Component<BoardProps, BoardState> {
     this.userTurn = true;
   }
 
-  resetGame(){
+  private resetGame(): void {
     this.userStep = -1;
     this.setState({
       level: 0,
-      startButtonEnabled: true
+      startButtonEnabled: true,
     });
   }
-};
+}
 
-async function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+async function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
