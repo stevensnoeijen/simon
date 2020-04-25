@@ -9,11 +9,12 @@ export type BoardProps = {
 export type BoardState = {
   level?: number;
   startButtonEnabled?: boolean;
-
-  green?: boolean;
-  red?: boolean;
-  yellow?: boolean;
-  blue?: boolean;
+  buttons: {
+    green?: boolean;
+    red?: boolean;
+    yellow?: boolean;
+    blue?: boolean;
+  }
 }
 
 export class Board extends React.Component<BoardProps, BoardState> {
@@ -39,10 +40,12 @@ export class Board extends React.Component<BoardProps, BoardState> {
     this.state = {
       level: 0,
       startButtonEnabled: true,
-      green: false,
-      red: false,
-      yellow: false,
-      blue: false
+      buttons: {
+        green: false,
+        red: false,
+        yellow: false,
+        blue: false,
+      }
     };
 
     this.startGame = this.startGame.bind(this);
@@ -53,12 +56,12 @@ export class Board extends React.Component<BoardProps, BoardState> {
     return (
         <div className={'circle'}>
         <div>
-            <Button className={'quarter-circle-top-left'} color={'green'} on={this.state.green as boolean} onClick={this.buttonClick} />
-            <Button className={'quarter-circle-top-right'} color={'red'} on={this.state.red as boolean} onClick={this.buttonClick} />
+            <Button className={'quarter-circle-top-left'} color={'green'} on={this.state.buttons.green as boolean} onClick={this.buttonClick} />
+            <Button className={'quarter-circle-top-right'} color={'red'} on={this.state.buttons.red as boolean} onClick={this.buttonClick} />
         </div>
         <div>
-            <Button className={'quarter-circle-buttom-left'} color={'yellow'} on={this.state.yellow as boolean} onClick={this.buttonClick} />
-            <Button className={'quarter-circle-bottom-right'} color={'blue'} on={this.state.blue as boolean} onClick={this.buttonClick} />
+            <Button className={'quarter-circle-buttom-left'} color={'yellow'} on={this.state.buttons.yellow as boolean} onClick={this.buttonClick} />
+            <Button className={'quarter-circle-bottom-right'} color={'blue'} on={this.state.buttons.blue as boolean} onClick={this.buttonClick} />
         </div>
         <div className={'inner-center'}>
             <strong>SIMON</strong>
@@ -131,15 +134,19 @@ export class Board extends React.Component<BoardProps, BoardState> {
 
   async playPattern(){
     for(const color of this.pattern){
-      this.setState({
-        [color]: true
-      });
+      this.setButton(color, true);
       await sleep(500);
-      this.setState({
-        [color]: false
-      });
+      this.setButton(color, false);
       await sleep(250);
     }
+  }
+
+  private setButton(color: string, on: boolean){
+    this.setState({
+      buttons: {
+        [color]: on
+      }
+    });
   }
 
   async buttonClick(color: string){
